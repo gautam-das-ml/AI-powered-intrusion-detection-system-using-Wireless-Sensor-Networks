@@ -9,7 +9,7 @@ from collections import defaultdict
 NUM_SENSORS = 18
 NUM_GATES = 6
 
-# 🔹 Model Definition
+#  Model Definition
 class GatePredictorUltraTinyTransformer(nn.Module):
     def __init__(self):
         super().__init__()
@@ -23,14 +23,14 @@ class GatePredictorUltraTinyTransformer(nn.Module):
     def forward(self, x):
         return self.fc_out(self.transformer(self.input_fc(x)))
 
-# 🔹 Load Trained Model
+#  Load Trained Model
 model = GatePredictorUltraTinyTransformer()
 state_dict = torch.load("gate_predictor.pth", map_location="cpu")
 model.load_state_dict(state_dict)
 model.eval()
 print(" Model Loaded Successfully!")
 
-# 🔹 MQTT Setup
+#  MQTT Setup
 MQTT_BROKER = "10.223.142.103"  # Raspberry Pi IP
 MQTT_PORT = 1883
 SENSOR_TOPIC = "sensors/esp32"
@@ -38,7 +38,7 @@ PREDICT_TOPIC = "prediction/gate"
 
 client = mqtt.Client()
 
-# 🔹 Store sensor states
+#  Store sensor states
 sensor_data = defaultdict(int)  # Store latest 0/1 state
 window_start = time.time()
 
